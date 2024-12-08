@@ -1,6 +1,4 @@
 def _install_dotfiles() {
-  echo "Installing dotfiles..."
-
   echo "Installing sketchybar config"
   rm -rf ~/.config/sketchybar
   ln -s $LUMEN/dotfiles/sketchybar ~/.config/sketchybar
@@ -12,4 +10,6 @@ def _install_dotfiles() {
   echo "Installing aerospace"
   rm -rf ~/.aerospace.toml
   ln -s $LUMEN/dotfiles/aerospace/.aerospace.toml ~/.aerospace.toml
+
+  chmod +x $LUMEN/**/*.sh
 }

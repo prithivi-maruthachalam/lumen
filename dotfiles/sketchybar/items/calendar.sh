@@ -1,6 +1,6 @@
 #!/bin/sh
 
-sketchybar --add item clock right \
-  --set clock update_freq=10 \
-  icon= \
-  label="$(date '+%a %d/%m %H:%M')"
+sketchybar --add item calendar right \
+  --set calendar icon=􀧞 \
+  update_freq=30 \
+  script="$PLUGIN_DIR/calendar.sh"
