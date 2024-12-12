@@ -23,6 +23,9 @@ alias oldvim="/usr/bin/vim"
 # lazygit
 alias gg="lazygit"
 
+# sketchybar
+alias bar="sketchybar --reload"
+
 # gradle stuff
 alias gradle="./gradlew"
 alias gspot="gradle spotlessApply"
