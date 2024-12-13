@@ -378,7 +378,7 @@ function icon_map() {
   "Obsidian")
     icon_result=":obsidian:"
     ;;
-  "IntelliJ IDEA")
+  "IntelliJ IDEA" | "IntelliJ_IDEA")
     icon_result=":idea:"
     ;;
   "Atom")

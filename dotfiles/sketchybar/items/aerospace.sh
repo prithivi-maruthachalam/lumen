@@ -12,7 +12,7 @@ get_workspaces() {
 }
 
 get_windows() {
-    aerospace list-windows --workspace $1 --json | jq --raw-output '.[] | "\(."app-name").\(."window-id")"'
+  aerospace list-windows --workspace $1 --json | jq --raw-output '.[] | "\(."app-name").\(."window-id")"'
 }
 
 # add display
@@ -20,6 +20,7 @@ for monitor_id in $(get_monitors); do
   for sid in $(get_workspaces $monitor_id); do
     sketchybar --add item space.$sid left \
       --subscribe space.$sid aerospace_workspace_change \
+      --subscribe space.$sid space_windows_change \
       --set space.$sid \
       background.color=$TRANSPARENT_WHITE \
       background.corner_radius=5 \
@@ -33,23 +34,27 @@ for monitor_id in $(get_monitors); do
       click_script="aerospace workspace $sid" \
       script="$CONFIG_DIR/plugins/aerospace.sh $sid"
 
-    for item_id in $(get_windows $sid); do
-      app_name=$(echo $item_id | cut -d"." -f1)
+    IFS=$'\n'
+    for app in $(get_windows $sid); do
+      app_name=$(echo $app | cut -d"." -f1 | tr " " "_")
+      item_id="space.$sid.apps.$app"
 
+      echo "APP NAME is $app_name in $sid"
       sketchybar --add item $item_id left \
-        --subscribe $item_id aerospace_workspace_change \
+        --subscribe $item_id space_windows_change \
         --set $item_id \
         background.drawing=off \
         icon.color=$TRANSPARENT_WHITE \
         icon.font="sketchybar-app-font:Regular:15.0" \
-        icon="$($CONFIG_DIR/plugins/icon_map_fn.sh "$app_name")" \
+        icon="$($CONFIG_DIR/plugins/icon_map_fn.sh $app_name)" \
         icon.padding_left=5 \
         icon.padding_right=5 \
         label.drawing=off \
         drawing=on \
         click_script="aerospace workspace $sid" \
-        script="$CONFIG_DIR/plugins/aerospace.sh $sid" # icon.font="sketchybar-app-font:Regular:15.0" \
+        script="$CONFIG_DIR/plugins/aerospace_apps.sh $sid"
     done
+    unset IFS
 
     # set background based on current active
     if [ "$sid" = "$(aerospace list-workspaces --focused)" ]; then
@@ -63,7 +68,7 @@ for monitor_id in $(get_monitors); do
     fi
 
   done
-  
+
   # add separator after a workspace
   sketchybar --add item separator.$monitor_id left \
     --set separator.$monitor_id \

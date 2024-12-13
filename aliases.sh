@@ -4,13 +4,14 @@ alias src="source ~/.zshrc ~/.zprofile"
 
 # misc commands
 alias tcp="tee >(pbcopy)"
-alias e="vi"
+alias igrep="grep -i"
 
 # Docker
 alias dcols="cat docker-compose.yml| yq '.services[]|key'"
 
 # AWS
 alias s3download="tr -d ',' | tr -d ' ' | tr -s '\n' | tr -d \\' | while read s; do echo \$s; aws s3 cp \$s .; done"
+alias iamgod="export AWS_DEFAULT_PROFILE=admin"
 
 # Gets lag from a kafka consumer group description
 alias slag="awk '{print \$6}' | egrep '[0-9]+' | awk '{sum += \$1} END {print sum}'"
@@ -19,6 +20,7 @@ alias slag="awk '{print \$6}' | egrep '[0-9]+' | awk '{sum += \$1} END {print su
 alias vim="nvim"
 alias vi="nvim"
 alias oldvim="/usr/bin/vim"
+alias e="vi"
 
 # lazygit
 alias gg="lazygit"
