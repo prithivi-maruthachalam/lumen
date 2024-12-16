@@ -39,7 +39,6 @@ for monitor_id in $(get_monitors); do
       app_name=$(echo $app | cut -d"." -f1 | tr " " "_")
       item_id="space.$sid.apps.$app"
 
-      echo "APP NAME is $app_name in $sid"
       sketchybar --add item $item_id left \
         --subscribe $item_id space_windows_change \
         --set $item_id \
@@ -74,7 +73,7 @@ for monitor_id in $(get_monitors); do
     --set separator.$monitor_id \
     background.drawing=off \
     label.drawing=off \
-    icon="|" \
+    icon="||" \
     icon.font="sketchybar-app-font:Regular:15.0" \
     icon.color=$TRANSPARENT_WHITE \
     icon.padding_left=5 \
