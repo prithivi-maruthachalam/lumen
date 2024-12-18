@@ -63,10 +63,10 @@ function icon_map() {
   "Zulip")
     icon_result=":zulip:"
     ;;
-  "Sequel Ace")
+  "Sequel Ace" | "DBeaver")
     icon_result=":sequel_ace:"
     ;;
-  "Zed")
+  "Zed" | "Cursor")
     icon_result=":zed:"
     ;;
   "TeamSpeak 3")

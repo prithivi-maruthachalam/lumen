@@ -29,8 +29,8 @@ alias gg="lazygit"
 alias bar="sketchybar --reload"
 
 # gradle stuff
-alias gradle="./gradlew"
-alias gspot="gradle spotlessApply"
-alias gclean="gradle clean"
-alias gbuild="gradle spotlessApply clean build"
-alias gtest="gradle test"
+alias gw="./gradlew"
+alias gspa="gw spotlessApply"
+alias gclean="gw clean"
+alias gbuild="gw spotlessApply clean build"
+alias gtest="gw test"

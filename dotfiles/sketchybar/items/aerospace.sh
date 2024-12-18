@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
+TMP_STATE_FILE="/tmp/lumen/sketchybar/aerospace.state"
+mkdir -p "$(dirname $TMP_STATE_FILE)"
+touch "$TMP_STATE_FILE"
+
 # listen to aerospace events
 sketchybar --add event aerospace_workspace_change
 
@@ -32,7 +36,7 @@ for monitor_id in $(get_monitors); do
       label.drawing=off \
       drawing=off \
       click_script="aerospace workspace $sid" \
-      script="$CONFIG_DIR/plugins/aerospace.sh $sid"
+      script="$CONFIG_DIR/plugins/aerospace.sh $sid $TMP_STATE_FILE"
 
     IFS=$'\n'
     for app in $(get_windows $sid); do
@@ -40,7 +44,6 @@ for monitor_id in $(get_monitors); do
       item_id="space.$sid.apps.$app"
 
       sketchybar --add item $item_id left \
-        --subscribe $item_id space_windows_change \
         --set $item_id \
         background.drawing=off \
         icon.color=$TRANSPARENT_WHITE \
@@ -49,9 +52,7 @@ for monitor_id in $(get_monitors); do
         icon.padding_left=5 \
         icon.padding_right=5 \
         label.drawing=off \
-        drawing=on \
-        click_script="aerospace workspace $sid" \
-        script="$CONFIG_DIR/plugins/aerospace_apps.sh $sid"
+        drawing=on
     done
     unset IFS
 
